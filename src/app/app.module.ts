@@ -7,13 +7,19 @@ import { MainFormComponent } from './main-form/main-form.component';
 import { ButtonSelectFileComponent } from './button-select-file/button-select-file.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MainListComponent } from './main-list/main-list.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { HomeComponent } from './home/home.component';
+import { VorlagenComponent } from './vorlagen/vorlagen.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainFormComponent,
     ButtonSelectFileComponent,
-    MainListComponent
+    MainListComponent,
+    NavbarComponent,
+    HomeComponent,
+    VorlagenComponent
   ],
   imports: [
     BrowserModule,
