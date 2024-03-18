@@ -1,0 +1,93 @@
+
+
+<h5>Rechnungen: </h5>
+<div class="table-container">
+  <div class="table-wrapper-rechnung">
+    <div class="table-header">
+      <table>
+        <thead>
+          <tr>
+            <th style="padding-right: 100px;">Anzahl</th>
+            <th style="padding-right: 100px;">Kundennummer</th>
+            <th style="padding-right: 100px;">Rechnungsnummer</th>
+            <th>Emailadresse          </th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="table-body">
+      <table>
+        <tbody>
+          <tr *ngFor="let item of rechnungsArray">
+            <td style="padding-left: 30px;">{{ item.anzahl }}</td>
+            <td style="padding-left: 150px;">{{ item.customerNumber }}</td>
+            <td style="padding-left: 150px;">
+              <a [href]="'http://localhost:8080/download/' + item.adresse" target="_blank">{{ item.invoiceNumber }}</a>
+            </td>
+            <td style="padding-left: 150px;">{{ item.email }}</td>
+          </tr>
+        </tbody>
+
+      </table>
+  </div>
+</div>
+<h5>Gutschriften</h5>
+<div class="table-container">
+  <div class="table-wrapper">
+    <div class="table-header">
+      <table>
+        <thead>
+          <tr>
+            <th style="padding-right: 100px;">Anzahl</th>
+            <th style="padding-right: 100px;">Kundennummer</th>
+            <th style="padding-right: 100px;">Rechnungsnummer</th>
+            <th>Emailadresse           </th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="table-body">
+      <table>
+        <tbody>
+          <tr *ngFor="let item of gutschriftenArray">
+            <td style="padding-left: 30px;">{{ item.anzahl }}</td>
+            <td style="padding-left: 150px;">{{ item.customerNumber }}</td>
+            <td style="padding-left: 150px;">
+              <a [href]="'http://localhost:8080/download/' + item.adresse" target="_blank">{{ item.invoiceNumber }}</a>
+            </td>
+            <td style="padding-left: 150px;">{{ item.email }}</td>
+          </tr>
+        </tbody>
+
+      </table>
+  </div>
+</div>
+
+<h5>Storno</h5>
+<div class="table-wrapper">
+  <div class="table-header">
+    <table>
+      <thead>
+        <tr>
+          <th style="padding-right: 100px;">Anzahl</th>
+          <th style="padding-right: 100px;">Kundennummer</th>
+          <th style="padding-right: 100px;">Rechnungsnummer</th>
+          <th>Emailadresse           </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="table-body">
+    <table>
+      <tbody>
+        <tr *ngFor="let item of stornoArray">
+          <td style="padding-left: 30px;">{{ item.anzahl }}</td>
+          <td style="padding-left: 150px;">{{ item.customerNumber }}</td>
+          <td style="padding-left: 150px;" >{{ item.invoiceNumber }}</td>
+          <td style="padding-left: 150px;">{{ item.email }}</td>
+        </tr>
+      </tbody>
+
+    </table>
+</div>
+

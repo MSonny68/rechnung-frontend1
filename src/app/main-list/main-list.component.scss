@@ -1,0 +1,31 @@
+.table-container {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: white; /* Hintergrundfarbe anpassen */
+}
+
+.table-wrapper-rechnung {
+  min-height: 40vh; /* Setze die maximale Höhe der Tabelle */
+  max-height: 40vh;
+  overflow-y: auto;  /* Füge eine vertikale Scrollbar hinzu, falls nötig */
+}
+.table-wrapper {
+   /* Setze die maximale Höhe der Tabelle */
+  min-height: 10vh;
+  overflow-y: auto;  /* Füge eine vertikale Scrollbar hinzu, falls nötig */
+}
+.table-header {
+  padding: 1rem;
+  position: sticky;
+  top: 0; /* Fixiere den Kopf oben */
+  background-color: #e0d5d5; /* Hintergrundfarbe des Kopfes */
+  z-index: 1; /* Stelle sicher, dass der Kopf über dem Scrollinhalt liegt */
+
+}
+
+.table-body {
+  /* Füge einen Abstand für den Tabellenkopf hinzu */
+  padding-top: 10px; /* Passe den Abstand nach Bedarf an */
+}
+
