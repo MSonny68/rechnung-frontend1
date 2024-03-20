@@ -11,6 +11,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { VorlagenComponent } from './vorlagen/vorlagen.component';
 import { EmailadressenComponent } from './emailadressen/emailadressen.component';
+import { EmailsendenComponent } from './emailsenden/emailsenden.component';
+import { Vorlage1Component } from './vorlage1/vorlage1.component';
+import { Vorlage2Component } from './vorlage2/vorlage2.component';
+import { Vorlage3Component } from './vorlage3/vorlage3.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,11 @@ import { EmailadressenComponent } from './emailadressen/emailadressen.component'
     NavbarComponent,
     HomeComponent,
     VorlagenComponent,
-    EmailadressenComponent
+    EmailadressenComponent,
+    EmailsendenComponent,
+    Vorlage1Component,
+    Vorlage2Component,
+    Vorlage3Component
   ],
   imports: [
     BrowserModule,

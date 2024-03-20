@@ -1,0 +1,5 @@
+.vorlagen-body{
+  min-height: 15vh; /* Setze die minimale,maximale Höhe der Tabelle */
+  max-height: 15vh;
+  overflow-y: auto;  /* Füge eine vertikale Scrollbar hinzu, falls nötig */
+}
