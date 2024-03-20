@@ -30,7 +30,14 @@
 .navbar-links a {
   text-decoration: none;
   color: #333; /* Ändern Sie die Farbe der Links nach Bedarf */
+  transition: background-color 0.3s, transform 0.3s; /* Übergangseffekt für Hintergrundfarbe und Transformation */
 }
+
+.navbar-links a:hover {
+  background-color: #ccc; /* Ändern Sie die Hintergrundfarbe bei Hover */
+  transform: translateY(-4px); /* Verschieben Sie den Link um 4 Pixel nach oben */
+}
+
 
 .navbar-actions {
   /* Fügen Sie hier ggf. Stile für Aktionselemente hinzu */

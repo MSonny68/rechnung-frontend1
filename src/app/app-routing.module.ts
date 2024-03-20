@@ -4,12 +4,14 @@ import { AppModule } from './app.module';
 import { ButtonSelectFileComponent } from './button-select-file/button-select-file.component';
 import { HomeComponent } from './home/home.component';
 import { VorlagenComponent } from './vorlagen/vorlagen.component';
+import { EmailadressenComponent } from './emailadressen/emailadressen.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent},
   {path :'splitter', component: ButtonSelectFileComponent},
-  {path :'vorlagen', component: VorlagenComponent}
+  {path :'vorlagen', component: VorlagenComponent},
+  {path :'emailadressen', component: EmailadressenComponent}
 ];
 
 @NgModule({

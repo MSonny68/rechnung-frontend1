@@ -10,6 +10,7 @@ import { MainListComponent } from './main-list/main-list.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { VorlagenComponent } from './vorlagen/vorlagen.component';
+import { EmailadressenComponent } from './emailadressen/emailadressen.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { VorlagenComponent } from './vorlagen/vorlagen.component';
     MainListComponent,
     NavbarComponent,
     HomeComponent,
-    VorlagenComponent
+    VorlagenComponent,
+    EmailadressenComponent
   ],
   imports: [
     BrowserModule,
