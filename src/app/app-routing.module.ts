@@ -14,6 +14,7 @@ const routes: Routes = [
   {path :'vorlagen', component: VorlagenComponent},
   {path :'emailadressen', component: EmailadressenComponent},
   { path:'senden', component: EmailsendenComponent}
+
 ];
 
 @NgModule({

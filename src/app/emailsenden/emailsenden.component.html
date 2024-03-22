@@ -1,3 +1,16 @@
 <app-navbar></app-navbar>
 <h3>Email senden</h3>
 <p>emailsenden works!</p>
+<form action="http://localhost:8080/send-email" method="POST" enctype="multipart/form-data">
+
+  <label for="to">Empfänger:</label>
+  <input type="email" id="to" name="to" required><br><br>
+  <label for="subject">Betreff:</label>
+  <input type="text" id="subject" name="subject" required><br><br>
+  <label for="message">Nachricht:</label><br>
+  <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
+  <label for="attachment">Anhang </label>
+  <input type="file" name="attachments" id="attachments" (change)="openFileExplorer($event)" accept="application/pdf"><br><br>
+
+  <button type="submit">E-Mail senden</button>
+</form>
