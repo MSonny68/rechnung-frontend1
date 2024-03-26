@@ -1,0 +1,22 @@
+.table-wrapper-body {
+  min-height: 40vh; /* Setze die maximale Höhe der Tabelle */
+  max-height: 40vh;
+  overflow-y: auto;  /* Füge eine vertikale Scrollbar hinzu, falls nötig */
+}
+.table-body {
+  display: block;
+  overflow-y: auto;
+  max-height: 300px; /* Beispielhöhe für Scrollbar */
+  min-width: 70em;
+}
+
+.table-body tr {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px; /* Abstand zwischen den Zeilen */
+}
+
+.table-body td {
+  flex: 1;
+  padding: 5px;
+}

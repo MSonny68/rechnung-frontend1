@@ -15,6 +15,10 @@ export class FileServiceService {
     return this.http.post<any>('http://localhost:8080/split', formData).toPromise();
   }
 
+  async uploadExcelFile(formData: FormData ): Promise<any> {
+    return this.http.post<any>('http://localhost:8080/excel', formData).toPromise();
+  }
+
   async downloadFile(pdfUrl: string): Promise<string> {
     try {
       const pdfBlob: Blob | undefined = await this.http.get(pdfUrl, { responseType: 'blob'}).toPromise();
@@ -40,6 +44,25 @@ export class FileServiceService {
       throw error;
     }
   }
+
+
+
+  async downloadExcelFile(fileName: string): Promise<{ data: ArrayBuffer, fileName: string }> {
+    try {
+      const response: any = await this.http.get(`http://localhost:8080/excel/${fileName}`).toPromise();
+      const excelData: any = response.data;
+      console.log("excelData:",excelData,"Filename:",fileName,"Response",response);
+      if (excelData) {
+        return { data: excelData, fileName: fileName };
+      } else {
+        throw new Error('Die Excel-Daten sind undefiniert');
+      }
+    } catch (error) {
+      throw new Error('Fehler beim Herunterladen der Excel-Datei');
+    }
+  }
+
+
 
   updateRenamedPDFArray(array: any[]): void {
     this.renamedPDFArraySubject.next(array);

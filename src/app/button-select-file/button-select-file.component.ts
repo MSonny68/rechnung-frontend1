@@ -72,4 +72,8 @@ export class ButtonSelectFileComponent implements OnInit{
     }
   }
 
+  async downloadExcelFile(){
+    
+  }
+
 }

@@ -1,3 +1,37 @@
 <app-navbar></app-navbar>
 <h3>Home</h3>
 <p>home works!</p>
+<p>--------------------</p>
+<p *ngIf="fileName">Es wird als aktuelle Excel-Datei:    {{ fileName }} verwendet</p>
+<p>Wenn gewünscht können Sie eine andere Datei wählen:</p>
+<p>--------------------</p>
+<button (click)="openFileExplorer()">Excel-Datei auswählen</button>
+<p>--------------------</p>
+<div *ngIf="fileName">
+  <!-- Anzeige der Spaltenüberschriften -->
+  <div *ngIf="headers.length > 0">
+    <h4>Spaltenüberschriften:</h4>
+    <ul>
+      <li *ngFor="let header of headers">{{ header }}</li>
+    </ul>
+  </div>
+
+  <!-- Anzeige der Zeilen -->
+  <div *ngIf="rows.length > 0">
+    <h4>Daten aus der Excel-Datei:</h4>
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let header of headers">{{ header }}</th>
+        </tr>
+      </thead>
+      <div class="">
+      <tbody class="table-body">
+        <tr *ngFor="let row of rows">
+          <td *ngFor="let cell of row">{{ cell }}</td>
+        </tr>
+      </tbody>
+      </div>
+    </table>
+  </div>
+</div>
