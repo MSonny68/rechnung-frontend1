@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FileServiceService } from '../file-service.service';
+import { ExcelServiceService } from '../excel-service.service';
 import * as XLSX from 'xlsx';
 
 @Component({
@@ -14,28 +15,16 @@ export class HomeComponent implements OnInit {
   headers: string[] = [];
   rows: any[] = [];
 
-  constructor(private fileService: FileServiceService){ }
+  constructor(private fileService: FileServiceService,
+              private excelService: ExcelServiceService) { }
 
-  ngOnInit(): void {
-    this.loadExcelFileFromBackend();
-  }
-
-  async loadExcelFileFromBackend() {
-    const savedFileName = localStorage.getItem('selectedFileName');
-    if (savedFileName) {
-      try {
-        const { data, fileName } = await this.fileService.downloadExcelFile(savedFileName);
-        this.fileName = fileName;
-        if (Array.isArray(data)) {
-          this.rows = data;
-        } else {
-          console.error('Ungültiges Datenformat:', data);
-        }
-      } catch (error) {
-        console.error('Fehler beim Laden der Excel-Datei vom Backend:', error);
-      }
+  async ngOnInit(): Promise<any>  {
+    this.fileName = localStorage.getItem('selectedFileName');
+    if (this.fileName) {
+      this.rows = await this.excelService.loadExcelFileFromBackend(this.fileName);
     }
   }
+
 
   async uploadFileToBackend(file: File) {
     const formData = new FormData();
@@ -61,9 +50,12 @@ export class HomeComponent implements OnInit {
         localStorage.setItem('selectedFileName', this.fileName);
         console.log('Selected file:', this.selectedFile);
         this.uploadFileToBackend(this.selectedFile);
+
       }
     });
     inputElement.click();
+    console.log("headers:",this.headers)
+
   }
 
   processExcelData(excelData: ArrayBuffer) {

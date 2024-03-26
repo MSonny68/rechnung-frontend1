@@ -10,6 +10,7 @@
             <th style="padding-right: 100px;">Anzahl</th>
             <th style="padding-right: 100px;">Kundennummer</th>
             <th style="padding-right: 100px;">Rechnungsnummer</th>
+            <th style="padding-right: 300px;">Email</th>
             <th>Firma          </th>
           </tr>
         </thead>
@@ -25,6 +26,7 @@
               <a [href]="'http://localhost:8080/download/' + item.adresse" target="_blank">{{ item.invoiceNumber }}</a>
             </td>
             <td style="padding-left: 150px;">{{ item.email }}</td>
+            <td style="padding-left: 150px;">{{ item.firma }}</td>
           </tr>
         </tbody>
 
@@ -41,6 +43,7 @@
             <th style="padding-right: 100px;">Anzahl</th>
             <th style="padding-right: 100px;">Kundennummer</th>
             <th style="padding-right: 100px;">Rechnungsnummer</th>
+            <th style="padding-right: 300px;">Email</th>
             <th>Firma           </th>
           </tr>
         </thead>
@@ -56,6 +59,7 @@
               <a [href]="'http://localhost:8080/download/' + item.adresse" target="_blank">{{ item.invoiceNumber }}</a>
             </td>
             <td style="padding-left: 150px;">{{ item.email }}</td>
+            <td style="padding-left: 150px;">{{ item.firma }}</td>
           </tr>
         </tbody>
 
@@ -72,6 +76,7 @@
           <th style="padding-right: 100px;">Anzahl</th>
           <th style="padding-right: 100px;">Kundennummer</th>
           <th style="padding-right: 100px;">Rechnungsnummer</th>
+          <th style="padding-right: 300px;">Email</th>
           <th>Firma           </th>
         </tr>
       </thead>
@@ -85,6 +90,7 @@
           <td style="padding-left: 150px;">{{ item.customerNumber }}</td>
           <td style="padding-left: 150px;" >{{ item.invoiceNumber }}</td>
           <td style="padding-left: 150px;">{{ item.email }}</td>
+          <td style="padding-left: 150px;">{{ item.firma }}</td>
         </tr>
       </tbody>
 

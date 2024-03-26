@@ -1,31 +1,47 @@
-import { Component , OnInit} from '@angular/core';
+import { Component , OnDestroy, OnInit} from '@angular/core';
 import { FileServiceService } from '../file-service.service';
 import { Observable , Subscription } from 'rxjs';
+import { ExcelServiceService } from '../excel-service.service';
 
 @Component({
   selector: 'app-main-list',
   templateUrl: './main-list.component.html',
   styleUrls: ['./main-list.component.scss']
 })
-export class MainListComponent implements OnInit{
+export class MainListComponent implements OnInit,OnDestroy{
   renamedPDFArray$: Observable<any> | undefined;
   rechnungsArray: any[] = [];
   gutschriftenArray: any[] = [];
   stornoArray: any[] = [];
+  rows: any[] = [];
+  fileName: string | null = null;
+
 
   renamedPDFArraySubscription: Subscription | undefined;
 
-  constructor(private fileService: FileServiceService) {}
 
-  ngOnInit(): void {
+  constructor(private fileService: FileServiceService,
+              private excelService: ExcelServiceService ) {}
+
+  async ngOnInit(): Promise<any>  {
+    this.fileName = localStorage.getItem('selectedFileName');
+    if (this.fileName) {
+      try {
+        this.rows = await this.excelService.loadExcelFileFromBackend(this.fileName);
+        console.log("main-list, rows", this.rows)
+      } catch (error) {
+        console.error('Error loading Excel file:', error);
+      }
+    }
     this.renamedPDFArray$ = this.fileService.renamedPDFArray$;
     this.renamedPDFArraySubscription = this.renamedPDFArray$.subscribe((data) => {
       this.populateTableArray(data);
     });
-    //throw new Error('Method not implemented.');
   }
 
+
   populateTableArray(data: any[]): void {
+
     let anzahl = 1;
     this.rechnungsArray = [];
     data.forEach(item => {
@@ -35,8 +51,10 @@ export class MainListComponent implements OnInit{
         const customerNumber = matches[1];
         const invoiceNumber = matches[2];
         const adresse  = item;
-        const email = matches[3].replace(/_/g, ' '); // Ersetze Unterstriche durch Leerzeichen
-        this.rechnungsArray.push({ anzahl,customerNumber, invoiceNumber,adresse, email });
+        const firma = matches[3].replace(/_/g, ' '); // Ersetze Unterstriche durch Leerzeichen
+        const customer = this.findCustomerByCustomerNumber(customerNumber);
+        const email = customer ? customer[2] : '';
+        this.rechnungsArray.push({ anzahl,customerNumber, invoiceNumber,adresse, email,firma });
         anzahl++
       }
     });
@@ -50,8 +68,10 @@ export class MainListComponent implements OnInit{
         const customerNumber = matches[1];
         const invoiceNumber = matches[2];
         const adresse  = item;
-        const email = matches[3].replace(/_/g, ' '); // Ersetze Unterstriche durch Leerzeichen
-        this.gutschriftenArray.push({ anzahl,customerNumber, invoiceNumber,adresse, email });
+        const customer = this.findCustomerByCustomerNumber(customerNumber);
+        const email = customer ? customer[2] : '';
+        const firma = matches[3].replace(/_/g, ' '); // Ersetze Unterstriche durch Leerzeichen
+        this.gutschriftenArray.push({ anzahl,customerNumber, invoiceNumber,adresse, email,firma });
         anzahl++
       }
     });
@@ -65,12 +85,25 @@ export class MainListComponent implements OnInit{
         const customerNumber = matches[1];
         const invoiceNumber = matches[2];
         const adresse  = item;
-        const email = matches[3].replace(/_/g, ' '); // Ersetze Unterstriche durch Leerzeichen
-        this.stornoArray.push({ anzahl,customerNumber, invoiceNumber,adresse, email });
+        const customer = this.findCustomerByCustomerNumber(customerNumber);
+        const email = customer ? customer[2] : '';
+        const firma = matches[3].replace(/_/g, ' '); // Ersetze Unterstriche durch Leerzeichen
+        this.stornoArray.push({ anzahl,customerNumber, invoiceNumber,adresse, email,firma });
         anzahl++
       }
     });
 
+  }
+
+  findCustomerByCustomerNumber(customerNumber: string): string[] | null {
+    // Durchsuchen Sie das this.rows-Array nach der Kundennummer und geben Sie die entsprechende Zeile zurück
+    for (let i = 1; i < this.rows.length; i++) { // Starte bei 1, um die Kopfzeile zu überspringen
+      const row = this.rows[i];
+      if (row && row.length >= 3 && row[0] === customerNumber) { // Annahme: Die Kundennummer steht in der ersten Spalte
+        return row;
+      }
+    }
+    return null; // Kundennummer nicht gefunden
   }
 
   ngOnDestroy(): void {
