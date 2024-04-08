@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class EmailsendenComponent {
   attachments: File | undefined;
+  vorlage1: String = "Hallo";
 
   openFileExplorer(event: any) {
     const fileList: FileList = event.target.files;
@@ -19,5 +20,6 @@ export class EmailsendenComponent {
 
     //inputElement.click();
   }
+
 
 }

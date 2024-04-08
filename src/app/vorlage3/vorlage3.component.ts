@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./vorlage3.component.scss']
 })
 export class Vorlage3Component {
+vorlageSpeichern() {
+throw new Error('Method not implemented.');
+}
 
 }

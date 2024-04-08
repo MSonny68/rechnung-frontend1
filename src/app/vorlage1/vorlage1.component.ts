@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./vorlage1.component.scss']
 })
 export class Vorlage1Component {
+vorlageSpeichern() {
+  
+};
 
 }

@@ -1,3 +1,19 @@
 <app-navbar></app-navbar>
-<h3>Email-Adressen</h3>
-<p>emailadressen works!</p>
+<h3>Email Übersicht</h3>
+<div class="scrollable-container">
+  <div class="accordion-container">
+    <div class="accordion" *ngFor="let email of emails; let i = index">
+      <div class="accordion-header" (click)="toggleAccordion(i)">
+        {{ email.customerNumber }} {{email.subject }}
+      </div>
+      <div class="accordion-body" [ngClass]="{'active': email.open}">
+        <p>Kundennummer: {{ email.customerNumber }}</p>
+        <p>{{ email.text}}: {{ email.invoiceNumber }}</p>
+        <p>Email: {{ email.email }}</p>
+        <p>Firma: {{ email.firma }}</p>
+        <p>Anhang: {{ email.adresse}}</p>
+        <button (click)="sendEmail(email)">E-Mail senden</button>
+      </div>
+    </div>
+  </div>
+</div>

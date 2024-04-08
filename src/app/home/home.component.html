@@ -1,9 +1,9 @@
 <app-navbar></app-navbar>
 <h3>Home</h3>
-<p>home works!</p>
-<p>--------------------</p>
-<p *ngIf="fileName">Es wird als aktuelle Excel-Datei:    {{ fileName }} verwendet</p>
-<p>Wenn gewünscht können Sie eine andere Datei wählen:</p>
+
+
+<p *ngIf="fileName">Es wird als aktuelle Excel-Datei:    {{ fileName }} verwendet.</p>
+<p>Wenn diese bearbeitet wurde bitte hier neu laden:</p>
 <p>--------------------</p>
 <button (click)="openFileExplorer()">Excel-Datei auswählen</button>
 <p>--------------------</p>
@@ -22,7 +22,7 @@
     <table>
       <thead>
         <tr>
-          
+
         </tr>
       </thead>
       <div class="">

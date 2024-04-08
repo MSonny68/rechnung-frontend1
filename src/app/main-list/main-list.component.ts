@@ -2,6 +2,7 @@ import { Component , OnDestroy, OnInit} from '@angular/core';
 import { FileServiceService } from '../file-service.service';
 import { Observable , Subscription } from 'rxjs';
 import { ExcelServiceService } from '../excel-service.service';
+import { EmailDataService } from '../email-data.service';
 
 @Component({
   selector: 'app-main-list',
@@ -9,19 +10,23 @@ import { ExcelServiceService } from '../excel-service.service';
   styleUrls: ['./main-list.component.scss']
 })
 export class MainListComponent implements OnInit,OnDestroy{
+
   renamedPDFArray$: Observable<any> | undefined;
   rechnungsArray: any[] = [];
+  emailArray: any[] = [];
   gutschriftenArray: any[] = [];
   stornoArray: any[] = [];
   rows: any[] = [];
   fileName: string | null = null;
 
 
+
   renamedPDFArraySubscription: Subscription | undefined;
 
 
   constructor(private fileService: FileServiceService,
-              private excelService: ExcelServiceService ) {}
+              private excelService: ExcelServiceService,
+              private emailDataService: EmailDataService ) {}
 
   async ngOnInit(): Promise<any>  {
     this.fileName = localStorage.getItem('selectedFileName');
@@ -53,11 +58,16 @@ export class MainListComponent implements OnInit,OnDestroy{
         const adresse  = item;
         const firma = matches[3].replace(/_/g, ' '); // Ersetze Unterstriche durch Leerzeichen
         const customer = this.findCustomerByCustomerNumber(customerNumber);
-        const email = customer ? customer[2] : '';
+        const email = customer ? customer[3] : '';
+        const open = false;
+        const text = "Rechnung";
         this.rechnungsArray.push({ anzahl,customerNumber, invoiceNumber,adresse, email,firma });
+        this.emailArray.push({customerNumber,invoiceNumber,adresse,email,firma,open,text});
         anzahl++
       }
+
     });
+
 
     anzahl = 1;
     this.gutschriftenArray = [];
@@ -71,7 +81,10 @@ export class MainListComponent implements OnInit,OnDestroy{
         const customer = this.findCustomerByCustomerNumber(customerNumber);
         const email = customer ? customer[2] : '';
         const firma = matches[3].replace(/_/g, ' '); // Ersetze Unterstriche durch Leerzeichen
+        const open = false;
+        const text = "Gutschrift";
         this.gutschriftenArray.push({ anzahl,customerNumber, invoiceNumber,adresse, email,firma });
+        this.emailArray.push({customerNumber,invoiceNumber,adresse,email,firma,open,text});
         anzahl++
       }
     });
@@ -88,7 +101,10 @@ export class MainListComponent implements OnInit,OnDestroy{
         const customer = this.findCustomerByCustomerNumber(customerNumber);
         const email = customer ? customer[2] : '';
         const firma = matches[3].replace(/_/g, ' '); // Ersetze Unterstriche durch Leerzeichen
+        const open = false;
+        const text = "Storno";
         this.stornoArray.push({ anzahl,customerNumber, invoiceNumber,adresse, email,firma });
+        this.emailArray.push({customerNumber,invoiceNumber,adresse,email,firma,open,text});
         anzahl++
       }
     });
@@ -99,7 +115,7 @@ export class MainListComponent implements OnInit,OnDestroy{
     // Durchsuchen Sie das this.rows-Array nach der Kundennummer und geben Sie die entsprechende Zeile zurück
     for (let i = 1; i < this.rows.length; i++) { // Starte bei 1, um die Kopfzeile zu überspringen
       const row = this.rows[i];
-      if (row && row.length >= 3 && row[0] === customerNumber) { // Annahme: Die Kundennummer steht in der ersten Spalte
+      if (row && row.length >= 4 && row[0] === customerNumber) { // Annahme: Die Kundennummer steht in der ersten Spalte
         return row;
       }
     }
@@ -110,6 +126,7 @@ export class MainListComponent implements OnInit,OnDestroy{
     if (this.renamedPDFArraySubscription) {
       this.renamedPDFArraySubscription.unsubscribe();
     }
+    this.emailDataService.emailArray = this.emailArray;
   }
 
 

@@ -8,7 +8,7 @@
   <label for="subject">Betreff:</label>
   <input type="text" id="subject" name="subject" required><br><br>
   <label for="message">Nachricht:</label><br>
-  <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
+  <textarea id="message" name="message" rows="4" cols="50" required>{{vorlage1}}</textarea><br><br>
   <label for="attachment">Anhang </label>
   <input type="file" name="attachments" id="attachments" (change)="openFileExplorer($event)" accept="application/pdf"><br><br>
 
